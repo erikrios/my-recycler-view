@@ -10,6 +10,11 @@ import io.erikrios.github.myrecyclerview.models.Hero
 
 class GridHeroAdapter(private val listHero: ArrayList<Hero>) :
     RecyclerView.Adapter<GridHeroAdapter.GridViewHolder>() {
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemCLickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridViewHolder {
         val binding =
@@ -31,7 +36,13 @@ class GridHeroAdapter(private val listHero: ArrayList<Hero>) :
                     .load(hero.photo)
                     .apply(RequestOptions().override(350, 550))
                     .into(imgItemPhoto)
+
+                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(hero) }
             }
         }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Hero)
     }
 }
