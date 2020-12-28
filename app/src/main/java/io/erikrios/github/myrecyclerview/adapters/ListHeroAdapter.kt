@@ -10,6 +10,11 @@ import io.erikrios.github.myrecyclerview.models.Hero
 
 class ListHeroAdapter(private val listHero: ArrayList<Hero>) :
     RecyclerView.Adapter<ListHeroAdapter.ListViewHolder>() {
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemRowHeroBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,8 +38,13 @@ class ListHeroAdapter(private val listHero: ArrayList<Hero>) :
 
                 tvItemName.text = hero.name
                 tvItemDescription.text = hero.description
+
+                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(hero) }
             }
         }
     }
 
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Hero)
+    }
 }
