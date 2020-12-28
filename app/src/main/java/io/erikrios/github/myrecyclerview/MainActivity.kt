@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val list = ArrayList<Hero>()
+    private var title = "Mode List"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         list.addAll(getListHeroes())
         showRecyclerList()
+        setActionBarTitle(title)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,14 +78,21 @@ class MainActivity : AppCompatActivity() {
     private fun setMode(selectedMode: Int) {
         when (selectedMode) {
             R.id.action_list -> {
+                title = "Mode List"
                 showRecyclerList()
             }
             R.id.action_grid -> {
+                title = "Mode Grid"
                 showRecylerGrid()
             }
             R.id.action_card_view -> {
+                title = "Mode CardView"
                 showRecyclerCardView()
             }
         }
+    }
+
+    private fun setActionBarTitle(title: String?) {
+        supportActionBar?.title = title
     }
 }
