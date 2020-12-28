@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.erikrios.github.myrecyclerview.adapters.CardViewHeroAdapter
 import io.erikrios.github.myrecyclerview.adapters.GridHeroAdapter
 import io.erikrios.github.myrecyclerview.adapters.ListHeroAdapter
 import io.erikrios.github.myrecyclerview.databinding.ActivityMainBinding
@@ -66,6 +67,12 @@ class MainActivity : AppCompatActivity() {
         binding.rvHeroes.adapter = gridHeroAdapter
     }
 
+    private fun showRecyclerCardView() {
+        binding.rvHeroes.layoutManager = LinearLayoutManager(this)
+        val cardViewHeroAdapter = CardViewHeroAdapter(list)
+        binding.rvHeroes.adapter = cardViewHeroAdapter
+    }
+
     private fun setMode(selectedMode: Int) {
         when (selectedMode) {
             R.id.action_list -> {
@@ -75,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 showRecylerGrid()
             }
             R.id.action_card_view -> {
-
+                showRecyclerCardView()
             }
         }
     }
