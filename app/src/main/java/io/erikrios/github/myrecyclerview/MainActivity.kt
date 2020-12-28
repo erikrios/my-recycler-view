@@ -3,6 +3,7 @@ package io.erikrios.github.myrecyclerview
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -88,6 +89,13 @@ class MainActivity : AppCompatActivity() {
         binding.rvHeroes.layoutManager = LinearLayoutManager(this)
         val listHeroAdapter = ListHeroAdapter(list)
         binding.rvHeroes.adapter = listHeroAdapter
+
+        listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Hero) {
+                showSelectedHero(data)
+            }
+
+        })
     }
 
     private fun showRecylerGrid() {
@@ -119,6 +127,10 @@ class MainActivity : AppCompatActivity() {
         }
         mode = selectedMode
         setActionBarTitle(title)
+    }
+
+    private fun showSelectedHero(hero: Hero) {
+        Toast.makeText(this, "Kamu memilih ${hero.name}", Toast.LENGTH_SHORT).show()
     }
 
     private fun setActionBarTitle(title: String?) {
