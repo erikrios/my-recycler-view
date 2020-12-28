@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun showRecylerGrid() {
+    private fun showRecyclerGrid() {
         binding.rvHeroes.layoutManager = GridLayoutManager(this, 2)
         val gridHeroAdapter = GridHeroAdapter(list)
         binding.rvHeroes.adapter = gridHeroAdapter
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_grid -> {
                 title = "Mode Grid"
-                showRecylerGrid()
+                showRecyclerGrid()
             }
             R.id.action_card_view -> {
                 title = "Mode CardView"
